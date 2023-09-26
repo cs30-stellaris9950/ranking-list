@@ -1,12 +1,12 @@
 # investment
 
-import random
+
 
 
 def main():
     # create list =
-    ranking = []
 
+    ranking = []
     print(ranking)
 
 
@@ -14,6 +14,7 @@ def main():
     loop = True
     while loop:
         print(f"***MAIN MENU***"
+              "\n0. Preset the list"
               "\n1. Print List "
               "\n2. Add Item to End "
               "\n3. Remove Last Item "
@@ -22,69 +23,70 @@ def main():
               "\n6. Move to Position"
               "\n7. Edit Item "
               "\n8. Exit")
-        menu_choice = int(input("Enter Option # "))
+        menu_choice = int(input("Enter Option #: "))
+
+        if  menu_choice == 0:
+            ranking = ['pizza', 'hamburger', 'good degrees']
+            print("List Preseted")
 
         # Print List
-        if menu_choice == 1:
+        elif menu_choice == 1:
             print("RANK LIST")
             if not ranking:
                 print("No Items in the Rank List")
             else:
-                for item in ranking:
-                    print(f"{item}. {ranking.index(item)}")
+                list_print(ranking)
+                # for item in ranking:
+                #     print(f"{ranking.index(item) + 1}. {item}")
 
-        # Deposits
+        # Add Item to End
         elif menu_choice == 2:
-            new_rank_item = input("Enter item")
+            new_rank_item = input("Enter item: ")
             ranking.append(new_rank_item)
-            for item in ranking:
-                print(f"{item}. {ranking.index(item)}")
+            list_print(ranking)
 
-        # Withdrawal
+        # Remove Last Item
         elif menu_choice == 3:
-            account_selected = int(input("Enter account #:"))
-            account_money_removed = int(input("Enter amount to withdraw:"))
-            if account_money_removed <= accounts[account_selected]:
-                print(f"Account {account_selected} Previous balance: ${accounts[account_selected]}")
-                accounts[account_selected] -= account_money_removed
-                print(f"Account {account_selected} New Balance: ${accounts[account_selected]}")
-            else:
-                print(f"Sorry, Insufficent funds.")
+            print(f"{ranking[len(ranking) - 1]} is removed from list")
+            ranking.pop()
+            list_print(ranking)
 
-        # Count under $2000
+        # Insert at Position
         elif menu_choice == 4:
-            under_2000_count = 0
-            for item in accounts:
-                if item < 2000:
-                    print(f"Account {accounts.index(item)}: ${item}")
-                    under_2000_count += 1
-            print(f"Accounts with less that $2000: {under_2000_count}")
+            insert_position = int(input("Insert Position: ")) - 1
+            insert_item = input("Item to Insert: ")
+            ranking.insert(insert_position, insert_item)
+            list_print(ranking)
 
-        # Generous Donor
+        # Remove at Position
         elif menu_choice == 5:
-            under_2000_count = 0
-            for item in accounts:
-                if item < 2000:
-                    account_index_store = accounts.index(item)
-                    print(f"Account {account_index_store} Previous Balance: ${item}")
-                    accounts[account_index_store] += 500
-                    print(f"Account {account_index_store} New Balance: ${accounts[account_index_store]}")
-                    under_2000_count += 1
-            print(f"Total Money Donated: ${under_2000_count * 500}")
+            remove_position = int(input("Position to Remove: ")) - 1
+            print(f"{ranking[remove_position]} removed from position {remove_position}")
+            ranking.remove(ranking[remove_position])
+            list_print(ranking)
 
-        # Hacker Attack
+        # Move to Position
         elif menu_choice == 6:
-            money_stolen_count = 0
-            for item in accounts:
-                money_stolen = item * 0.05
-                accounts[accounts.index(item)] -= money_stolen
-                money_stolen_count += money_stolen
-            print(f"Total Stolen is: ${money_stolen_count}")
+            old_position = int(input("Move item from: ")) - 1
+            new_position = int(input("Move Item to: ")) - 1
+            ranking.insert(new_position, ranking[old_position])
+            # ranking.pop(old_position)
+            list_print(ranking)
+
+        # Edit Item
+        elif menu_choice == 7:
+            index_for_replace = int(input("Enter Position: ")) - 1
+            replace = input("Replace with: ")
+            ranking[index_for_replace] = replace
+            list_print(ranking)
 
         # Exit
-        elif menu_choice == 7:
+        elif menu_choice == 8:
             loop = False
 
+def list_print(list):
+    for item in list:
+        print(f"{list.index(item) + 1}. {item}")
 
 # Call Function
 main()
