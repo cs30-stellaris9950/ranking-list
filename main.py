@@ -36,8 +36,7 @@ def main():
                 print("No Items in the Rank List")
             else:
                 list_print(ranking)
-                # for item in ranking:
-                #     print(f"{ranking.index(item) + 1}. {item}")
+
 
         # Add Item to End
         elif menu_choice == 2:
@@ -69,8 +68,8 @@ def main():
         elif menu_choice == 6:
             old_position = int(input("Move item from: ")) - 1
             new_position = int(input("Move Item to: ")) - 1
-            ranking.insert(new_position, ranking[old_position])
-            # ranking.pop(old_position)
+            thing = ranking.pop(old_position)
+            ranking.insert(new_position, thing)
             list_print(ranking)
 
         # Edit Item
@@ -84,9 +83,14 @@ def main():
         elif menu_choice == 8:
             loop = False
 
-def list_print(list):
-    for item in list:
-        print(f"{list.index(item) + 1}. {item}")
+        else:
+            print("NOT IN MENU OPTION")
+
+
+def list_print(ranking_list):
+    for item in ranking_list:
+        print(f"{ranking_list.index(item) + 1}. {item}")
+
 
 # Call Function
 main()
