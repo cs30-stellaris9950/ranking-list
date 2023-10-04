@@ -5,8 +5,10 @@
 
 def main():
     # create list =
-
-    ranking = []
+    with open("ranking_list_storage.txt", "r") as ranking_list_output:
+        read = ranking_list_output.read()
+        ranking = read.split('-')
+    # ranking = []
     print(ranking)
 
 
@@ -25,9 +27,10 @@ def main():
               "\n8. Exit")
         menu_choice = int(input("Enter Option #: "))
 
-        if  menu_choice == 0:
+        if menu_choice == 0:
             ranking = ['pizza', 'hamburger', 'good degrees']
             print("List Preseted")
+            storage_writing(ranking)
 
         # Print List
         elif menu_choice == 1:
@@ -38,17 +41,20 @@ def main():
                 list_print(ranking)
 
 
+
         # Add Item to End
         elif menu_choice == 2:
             new_rank_item = input("Enter item: ")
             ranking.append(new_rank_item)
             list_print(ranking)
+            storage_writing(ranking)
 
         # Remove Last Item
         elif menu_choice == 3:
             print(f"{ranking[len(ranking) - 1]} is removed from list")
             ranking.pop()
             list_print(ranking)
+            storage_writing(ranking)
 
         # Insert at Position
         elif menu_choice == 4:
@@ -56,6 +62,7 @@ def main():
             insert_item = input("Item to Insert: ")
             ranking.insert(insert_position, insert_item)
             list_print(ranking)
+            storage_writing(ranking)
 
         # Remove at Position
         elif menu_choice == 5:
@@ -63,6 +70,7 @@ def main():
             print(f"{ranking[remove_position]} removed from position {remove_position}")
             ranking.remove(ranking[remove_position])
             list_print(ranking)
+            storage_writing(ranking)
 
         # Move to Position
         elif menu_choice == 6:
@@ -71,6 +79,7 @@ def main():
             thing = ranking.pop(old_position)
             ranking.insert(new_position, thing)
             list_print(ranking)
+            storage_writing(ranking)
 
         # Edit Item
         elif menu_choice == 7:
@@ -78,6 +87,7 @@ def main():
             replace = input("Replace with: ")
             ranking[index_for_replace] = replace
             list_print(ranking)
+            storage_writing(ranking)
 
         # Exit
         elif menu_choice == 8:
@@ -90,6 +100,14 @@ def main():
 def list_print(ranking_list):
     for item in ranking_list:
         print(f"{ranking_list.index(item) + 1}. {item}")
+
+
+def storage_writing(list_to_write):
+    with open('ranking_list_storage.txt', 'w') as write_into:
+        write_into.writelines(('-'.join(list_to_write)))
+        # write_into.writelines(('-'.join(list_to_write)))
+        # ('\n'.join(items))
+
 
 
 # Call Function
